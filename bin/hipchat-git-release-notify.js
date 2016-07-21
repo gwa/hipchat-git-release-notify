@@ -4,10 +4,11 @@ var exec = require('child_process').exec,
 
 var
   project = process.argv[2],
-  url = process.argv[3];
-  idroom = process.argv[4],
-  token = process.argv[5],
+  url     = process.argv[3],
+  idroom  = process.argv[4],
+  token   = process.argv[5];
 
+// Try to get local git tag or hash and send a notification to the HipChat room.
 getGitTag(function(tag) {
   if (tag) {
     sendNotification(
@@ -17,15 +18,24 @@ getGitTag(function(tag) {
       idroom,
       token
     );
-  } else {
-    console.log('no tag available');
+    return;
   }
-});
 
-/*
-'2953429',
-'Zg7dtEKxQq5qoVDELjaDuJFP8cmQaLjdVRZ0e8eW'
-*/
+  getGitHash(function(hash) {
+    if (hash) {
+      sendNotification(
+        project,
+        hash,
+        url,
+        idroom,
+        token
+      );
+      return;
+    }
+
+    console.log('no tag/hash available');
+  });
+});
 
 // ----
 
@@ -46,7 +56,7 @@ function sendNotification(project, tag, url, idroom, token) {
 
     var req = http.request(options, (res) => {
       console.log(`STATUS: ${res.statusCode}`);
-      console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+      // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
         console.log(`BODY: ${chunk}`);
@@ -67,9 +77,6 @@ function sendNotification(project, tag, url, idroom, token) {
 
 // ----
 
-/**
- * Returns either a git tag or hash
- */
 function getGitTag(callback) {
   var parseError = function(response) {
     var pattern = /([a-f0-9]{40})/,
@@ -94,9 +101,9 @@ function getGitTag(callback) {
   );
 }
 
-function getGitBranch(callback) {
+function getGitHash(callback) {
   executeShellCommand(
-    'git rev-parse --abbrev-ref HEAD',
+    'git log -n 1 --pretty=format:"%H"',
     function (response) {
       callback(response);
     },
