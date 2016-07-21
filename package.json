@@ -1,0 +1,22 @@
+{
+  "name": "hipchat-git-release-notify",
+  "version": "0.1.0",
+  "description": "Node script to send a notification to HipChat with the current git tag or hash",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwa/hipchat-git-release-notify.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gwa/hipchat-git-release-notify/issues"
+  },
+  "homepage": "https://github.com/gwa/hipchat-git-release-notify#readme",
+  "bin": {
+    "hipchat-git-release-notify": "bin/hipchat-git-release-notify.js"
+  }
+}
