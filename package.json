@@ -1,6 +1,6 @@
 {
   "name": "hipchat-git-release-notify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node script to send a notification to HipChat with the current git tag or hash",
   "main": "index.js",
   "scripts": {

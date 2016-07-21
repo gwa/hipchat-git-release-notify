@@ -49,12 +49,11 @@ function sendNotification(project, tag, url, idroom, token) {
       method: 'POST'
     },
     postData = JSON.stringify({
-      'color': 'green',
       'notify': true,
       'message': project + ': <a href="' + url + '">' + tag + '</a> released.'
     });
 
-    var req = http.request(options, (res) => {
+    var req = http.request(options, function(res) {
       console.log(`STATUS: ${res.statusCode}`);
       // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
       res.setEncoding('utf8');
@@ -66,7 +65,7 @@ function sendNotification(project, tag, url, idroom, token) {
       })
     });
 
-    req.on('error', (e) => {
+    req.on('error', function(e) {
       console.log(`problem with request: ${e.message}`);
     });
 
