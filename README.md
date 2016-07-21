@@ -18,4 +18,4 @@ The following command line arguments are required:
 * `[server identifier]`: A string identifing the project or server, e.g. `MyProject STAGING`.
 * `[project URL]`: A URL used in the notification message.
 * `[HipChat room ID]`: The HipChat room ID, available from the [HipChat website](https://www.hipchat.com/rooms).
-* `[HipChat room ID]`: A HipChat room token, that can be created on the [HipChat website](https://www.hipchat.com/rooms).
+* `[HipChat room token]`: A HipChat room token, that can be created on the [HipChat website](https://www.hipchat.com/rooms).
